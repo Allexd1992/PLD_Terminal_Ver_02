@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HslCommunication;
+using HslCommunication.Profinet.Omron;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +13,8 @@ namespace PLD_Terminal_Ver__02.Model
 {
     class MainModel
     {
+        OmronFinsNet OmronPLC_01, OmronPLC_03;
+        OperateResult PLC_01_connect, PLC_03_connect;
         Thread thread;
         public float TapeStartPos {get; set;}
         public float TapeEndPos {get; set;}
@@ -38,6 +42,7 @@ namespace PLD_Terminal_Ver__02.Model
         private string path = "IP_Adress.txt";
         private string PLC_01;
         private string PLC_03;
+        private string PC;
         private int runNumb;
         private int runTime;
         public MainModel()
@@ -49,17 +54,31 @@ namespace PLD_Terminal_Ver__02.Model
                 {
                     PLC_01 = (sr.ReadLine());
                     PLC_03 = (sr.ReadLine());
+                    PC = (sr.ReadLine());
 
                 }
+                OmronPLC_01 = new OmronFinsNet(PLC_01, 9600);
+                OmronPLC_01.SA1 = Convert.ToByte(PC.Split('.')[3]);             
+                OmronPLC_01.DA1 = Convert.ToByte(PLC_01.Split('.')[3]);
+                PLC_01_connect = OmronPLC_01.ConnectServer();
+                OmronPLC_03 = new OmronFinsNet(PLC_03, 9600);
+                OmronPLC_03.SA1 = Convert.ToByte(PC.Split('.')[3]);
+                OmronPLC_03.DA1 = Convert.ToByte(PLC_03.Split('.')[3]);// объект соединения 
+                PLC_03_connect = OmronPLC_03.ConnectServer();
+               // new PlcTcp();
             }
             catch
             {
                 LogWriter.WriteLog("", "", "IP_Adress file is not found", 0);
             }
 
+
+
+
             try
             {
-                TargetName = PlcTcp.ReadStringPLC(PLC_01, 15400);
+               // TargetName = PlcTcp.ReadStringPLC(PLC_01, 15400);
+                TargetName = OmronPLC_01.ReadString("D15400", 99).Content;
                 TapeName = PlcTcp.ReadStringPLC(PLC_01, 10000);
                 TargetNum = PlcTcp.ReadIntPLC(PLC_01, 15500);
                 TapeNum = PlcTcp.ReadIntPLC(PLC_01, 11280);

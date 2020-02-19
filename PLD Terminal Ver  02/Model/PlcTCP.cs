@@ -6,16 +6,26 @@ using System.Text;
 using System.Threading.Tasks;
 using OmronFinsTCP.Net;
 
+
 namespace PLD_Terminal_Ver__02.Model
 {
     
 
     class PlcTcp
     {
+        
+        static EtherNetPLC PLC;
+        static  string IP_OLD=" ";
         public static double GetValueD(string ip, short adr)
         {
-            EtherNetPLC PLC = new EtherNetPLC();
-            PLC.Link(ip, 9600, 1000);
+            if (IP_OLD != ip)
+            {
+                PLC.Close();
+                PLC = new EtherNetPLC();
+                PLC.Link(ip, 9600, 500);
+                IP_OLD = ip;
+            }
+
             short[] buff = new short[2];
             byte[] buff2 = new byte[4];
             byte[] buff3 = new byte[2];
@@ -27,22 +37,34 @@ namespace PLD_Terminal_Ver__02.Model
             buff2[2] = buff3[0];
             buff2[3] = buff3[1];
             int var = BitConverter.ToInt32(buff2, 0);
-            PLC.Close();
+
             return Convert.ToDouble(var);
         }
         public static double GetValueR(string ip, short adr)
         {
-            EtherNetPLC PLC = new EtherNetPLC();
-            PLC.Link(ip, 9600, 1000);
+            if (IP_OLD != ip)
+            {
+                PLC.Close();
+                PLC = new EtherNetPLC();
+                PLC.Link(ip, 9600, 500);
+                IP_OLD = ip;
+            }
+
             short buff;
             PLC.ReadWord(PlcMemory.DM, adr, out buff);
-            PLC.Close();
+
             return Convert.ToDouble(buff);
         }
         public static void WriteStringPLC(string ip, string Value, int adr)
         {
-            EtherNetPLC PLC = new EtherNetPLC();
-            PLC.Link(ip, 9600, 1000);
+            if (IP_OLD != ip)
+            {
+                PLC.Close();
+                PLC = new EtherNetPLC();
+                PLC.Link(ip, 9600, 500);
+                IP_OLD = ip;
+            }
+
             char[] buffful = new char[198];
             byte[] buffs = new byte[2];
             short[] buff = new short[100];
@@ -60,12 +82,18 @@ namespace PLD_Terminal_Ver__02.Model
                 }
             }
             PLC.WriteWords(PlcMemory.DM, (short)adr, 99, buff);
-            PLC.Close();
+            
         }
         public static string ReadStringPLC(string ip,int adr)
         {
-            EtherNetPLC PLC = new EtherNetPLC();
-            PLC.Link(ip, 9600, 1000);
+            if (IP_OLD != ip)
+            {
+                PLC.Close();
+                PLC = new EtherNetPLC();
+                PLC.Link(ip, 9600, 500);
+                IP_OLD = ip;
+            }
+            
             short[] buff = new short[99];
             char[] buffful = new char[198];
             byte[] buffs = new byte[2];
@@ -78,7 +106,7 @@ namespace PLD_Terminal_Ver__02.Model
                 buffful[i * 2 + 1] = (char)buffs[0];
 
             }
-            PLC.Close();
+           
             string str = new string(buffful);
             char[] chr = str.ToCharArray();
             string str1 = "";
@@ -96,55 +124,89 @@ namespace PLD_Terminal_Ver__02.Model
         }
         public static void WriteRealPLC(string ip,int adr, float value)
         {
-            EtherNetPLC PLC = new EtherNetPLC();
-            PLC.Link(ip, 9600, 1000);
+            if (IP_OLD != ip)
+            {
+                PLC.Close();
+                PLC = new EtherNetPLC();
+                PLC.Link(ip, 9600, 500);
+                IP_OLD = ip;
+            }
+
             byte[] BuffB = BitConverter.GetBytes(value);
             short[] ValW = new short[2];
             ValW[0] = BitConverter.ToInt16(BuffB, 0);
             ValW[1] = BitConverter.ToInt16(BuffB, 2);
             PLC.WriteWords(PlcMemory.DM, (short)adr, 2, ValW);
-            PLC.Close();
+           
         }
         public static void WriteIntPLC(string ip, int adr, short value)
         {
-            EtherNetPLC PLC = new EtherNetPLC();
-            PLC.Link(ip, 9600, 1000);
+            if (IP_OLD != ip)
+            {
+                PLC.Close();
+                PLC = new EtherNetPLC();
+                PLC.Link(ip, 9600, 500);
+                IP_OLD = ip;
+            }
+
 
             PLC.WriteWord(PlcMemory.DM, (short)adr, value);
-            PLC.Close();
+            
         }
         public static int ReadIntPLC(string ip,int adr)
         {
-            EtherNetPLC PLC = new EtherNetPLC();
-            PLC.Link(ip, 9600, 1000);
+            if (IP_OLD != ip)
+            {
+                PLC.Close();
+                PLC = new EtherNetPLC();
+                PLC.Link(ip, 9600, 500);
+                IP_OLD = ip;
+            }
+
             short Varl;
             PLC.ReadWord(PlcMemory.DM, (short)adr, out Varl);
-            PLC.Close();
+          
             return (int)Varl;
         }
         public static float ReadRealPLC(string ip,int adr)
         {
-            EtherNetPLC PLC = new EtherNetPLC();
-            PLC.Link(ip, 9600, 1000);
+            if (IP_OLD != ip)
+            {
+                PLC.Close();
+                PLC = new EtherNetPLC();
+                PLC.Link(ip, 9600, 500);
+                IP_OLD = ip;
+            }
+            
             float Var;
             PLC.ReadReal(PlcMemory.DM, (short)adr, out Var);
-            PLC.Close();
             return Var;
         }
         public static bool GetBitPLC(string ip, short adr, int numb)
         {
-            EtherNetPLC PLC = new EtherNetPLC();
-            PLC.Link(ip, 9600, 1000);
+            if (IP_OLD != ip)
+            {
+                PLC.Close();
+                PLC = new EtherNetPLC();
+                PLC.Link(ip, 9600, 500);
+                IP_OLD = ip;
+            }
+
             short BuffW;
             PLC.ReadWord(PlcMemory.DM, adr, out BuffW);
             BitArray bitArr = new BitArray(BitConverter.GetBytes(BuffW));
-            PLC.Close();
             return bitArr[numb];
         }
         public static void SetBitPLC(string ip, short adr, int numb, bool value)
         {
-            EtherNetPLC PLC = new EtherNetPLC();
-            PLC.Link(ip, 9600, 1000);
+            if (IP_OLD != ip)
+            {
+                PLC.Close();
+                PLC = new EtherNetPLC();
+                PLC.Link(ip, 9600, 500);
+                IP_OLD = ip;
+            }
+
             if (value)
             {
                 PLC.SetBitState(PlcMemory.DM, adr + "." + numb, BitState.ON);
@@ -153,7 +215,13 @@ namespace PLD_Terminal_Ver__02.Model
             {
                 PLC.SetBitState(PlcMemory.DM, adr + "." + numb, BitState.OFF);
             }
-            PLC.Close();
+           
         }  
+        public PlcTcp()
+        {
+            PLC = new EtherNetPLC();
+            
+             
+        }
     }
 }
