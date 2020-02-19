@@ -1,0 +1,219 @@
+﻿<Window x:Class="PLD_Terminal_Ver__02.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLD_Terminal_Ver__02.View"
+        mc:Ignorable="d"
+        xmlns:vm="clr-namespace:PLD_Terminal_Ver__02.ViewModel"
+        Title="PLD Terminal Ver 2.0" Height="600" Width="400" Background="#FF17181A">
+    <Window.Resources>
+        <ResourceDictionary Source="Dictionary.xaml"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.ColumnSpan="10" Grid.RowSpan="6" Margin="5" Background="Black">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="1" Grid.Column="7" Grid.ColumnSpan="1" Template="{StaticResource btGreenTemplate}" Content="Save" Command="{Binding SaveTape}"/>
+                <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="1" Content="Tape Name" Style="{StaticResource Tittle_St}" FontSize="10"/>
+                <Label Grid.Row="5" Grid.Column="5"  Content="Start position" FontSize="9" Style="{StaticResource  General_St}"/>
+                <Label Grid.Row="5" Grid.Column="7"  Content="End position" FontSize="10" Style="{StaticResource  General_St}"/>
+                <Label Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="1" Content="Name" Style="{StaticResource General_St}" FontSize="10"  HorizontalAlignment="Center"/>
+                <Button Grid.Row="3" Grid.Column="3" Template="{StaticResource btGreenTemplate}" Content="Prew" Command="{Binding TapeDown}"/>
+                <TextBox Grid.Row="3" Grid.Column="5" Template="{StaticResource monValue}" Text="{Binding sTapeNum}"/>
+                <Button Grid.Row="3" Grid.Column="7" Template="{StaticResource btGreenTemplate}" Content="Next" Command="{Binding TapeUp}"/>
+                <Label Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="1" Content="Tape" Style="{StaticResource General_St}" FontSize="10"  HorizontalAlignment="Center"/>
+                <Label Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="1" Content="#" Style="{StaticResource General_St}" FontSize="12"  HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="7" Grid.Column="3" Template="{StaticResource setValue}" Text="{Binding sTapeName}" />
+                <Label Grid.Row="7" Grid.Column="4" Grid.RowSpan="2" Content="_" Style="{StaticResource General_St}" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="7" Grid.Column="5" Template="{StaticResource setValue}" Text="{Binding sTapeStartPos}" />
+                <Label Grid.Row="7" Grid.Column="6" Grid.ColumnSpan="1" Content="-" Style="{StaticResource General_St}" FontSize="12"  VerticalAlignment="Center"/>
+                <TextBox Grid.Row="7" Grid.Column="7" Template="{StaticResource setValue}" Text="{Binding sTapeEndPos}" />
+                <Label Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="1" Content="Delta" Style="{StaticResource General_St}" FontSize="10"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="9" Grid.Column="3" Template="{StaticResource setValue}" Text="{Binding sDelta}" />
+                <Label Grid.Row="9" Grid.Column="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="Length" Style="{StaticResource General_St}" FontSize="10"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="9" Grid.Column="7" Template="{StaticResource monValue}" Text="{Binding slehgth}" Tag="m" />
+                <Label Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="1" Content="Wind coil" Style="{StaticResource General_St}" FontSize="10"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="11" Grid.Column="3" Template="{StaticResource setValue}" Text="{Binding sCoil01}" Tag="" />
+                <Label Grid.Row="11" Grid.Column="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="Unwind coil" Style="{StaticResource General_St}" FontSize="10"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="11" Grid.Column="7" Template="{StaticResource setValue}" Text="{Binding sCoil02}" Tag=""/>
+            </Grid>
+            <Grid Grid.Row="6" Grid.ColumnSpan="10" Grid.RowSpan="4" Margin="5" Background="Black">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.4*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="1" Grid.Column="7" Grid.ColumnSpan="1" Template="{StaticResource btGreenTemplate}" Content="Save" Command="{Binding SaveTarget}"/>
+                <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="2" Content="Target" Style="{StaticResource Tittle_St}" />
+                <Button Grid.Row="3" Grid.Column="3" Template="{StaticResource btGreenTemplate}" Content="Prew" Command="{Binding TargetDown}"/>
+                <TextBox Grid.Row="3" Grid.Column="5" Template="{StaticResource monValue}" Text="{Binding sTargetNum}"/>
+                <Button Grid.Row="3" Grid.Column="7" Template="{StaticResource btGreenTemplate}" Content="Next" Command="{Binding TargetUp}"/>
+                <Label Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="1" Content="Name" Style="{StaticResource General_St}" FontSize="10"  HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="5" Template="{StaticResource setValue}" Text="{Binding sTargetName}" />
+            </Grid>
+            <Grid Grid.Row="10" Grid.ColumnSpan="10" Grid.RowSpan="5" Margin="5" Background="Black">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.4*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Column="7" Grid.Row="1" Template="{StaticResource blGreen}"  Width="20" Content="Stop" HorizontalAlignment="Right"  Tag="{Binding sWrDbRun}" Command="{Binding OffAutoWB}"/>
+                <Label Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3"  Content="Name" FontSize="10" Style="{StaticResource  General_St}" HorizontalAlignment="Center"/>
+                <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="3"  Content="Write to data  base" FontSize="10" Style="{StaticResource  General_St}" HorizontalAlignment="Center" Margin="40,0,20.436,0" Width="106"/>
+                <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Content="Current status" Style="{StaticResource Tittle_St}" />
+                <Label Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3"  Content="Name" FontSize="10" Style="{StaticResource  General_St}" HorizontalAlignment="Center"/>
+                <Label Grid.Row="3" Grid.Column="7"  Content="Coordinat" FontSize="10" Style="{StaticResource  General_St}" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="5" Grid.Column="7" Template="{StaticResource monValue}" Text="{Binding sTapeCoor}" Tag=""/>
+
+                <Label Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="1" Content="Tape" Style="{StaticResource General_St}" FontSize="10"  HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3" Template="{StaticResource monValue}" Text="{Binding sTapeNameMon}" />
+                <Label Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="3"  Content="Name" FontSize="10" Style="{StaticResource  General_St}" HorizontalAlignment="Center"/>
+                <Label Grid.Row="7" Grid.Column="7" Grid.RowSpan="2"  Content="Deg" FontSize="10" Style="{StaticResource  General_St}" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="9" Grid.Column="7" Template="{StaticResource monValue}" Text="{Binding sTargetDeg}" Tag=""/>
+
+                <Label Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="1" Content="Target" Style="{StaticResource General_St}" FontSize="10"  HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="3" Template="{StaticResource monValue}" Text="{Binding sTargetNameMon}" />
+            </Grid>
+            <Grid Grid.Column="0" Grid.Row="15" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="3" Background="Black">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Style="{StaticResource Tittle_St}"  FontSize="12" Content="WRITE TO DATA BASE"/>
+                <Button Grid.Column="1" Grid.Row="3" Template="{StaticResource btGreenTemplate}"   Content="Run" Tag="{Binding sWrDbOn}" Command="{Binding RunWB}"/>
+                <Button Grid.Column="3" Grid.Row="3" Template="{StaticResource btRedTemplate}"   Content="Stop" Tag="{Binding sWrDbOff}" Command="{Binding StopWB}"/>
+            </Grid>
+            <Grid Grid.Column="5" Grid.Row="15" Grid.ColumnSpan="6" Grid.RowSpan="3" Margin="3" Background="Black">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource Tittle_St}"  FontSize="12" Content="AUTOWRITE" />
+                <Button Grid.Column="1" Grid.Row="3" Template="{StaticResource btGreenTemplate}"   Content="Run" Tag="{Binding sAutoWrOn}" Command="{Binding OnAutoWB}"/>
+                <Button Grid.Column="3" Grid.Row="3" Template="{StaticResource btRedTemplate}"   Content="Stop" Tag="{Binding sAutoWrOff}" Command="{Binding OffAutoWB}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
